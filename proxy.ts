@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { verifyToken } from "@/lib/auth"
 
 export const config = {
   matcher: "/",
 }
 
 export async function proxy(request: NextRequest) {
-  const token = request.cookies.get("auth")?.value
-  if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url))
-  }
-
   try {
-    const { verifyToken } = await import("@/lib/auth")
+    const token = request.cookies.get("auth")?.value
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", request.url))
+    }
+
     const user = await verifyToken(token)
     if (!user) {
       return NextResponse.redirect(new URL("/login", request.url))
