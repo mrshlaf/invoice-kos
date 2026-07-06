@@ -22,11 +22,12 @@ export function buildDocDefinition(
 ): TDocumentDefinitions {
   return {
     pageSize: "A4",
-    pageMargins: [56, 48, 56, 48],
+    pageMargins: [56, 60, 56, 60],
     defaultStyle: {
       font: "Roboto",
-      fontSize: 12,
-      lineHeight: 1.6,
+      fontSize: 10,
+      lineHeight: 1.4,
+      color: "#000000",
     },
     info: {
       title: `INV-${data.invoiceNumber} - ${data.namaPenyewa}`,
@@ -37,15 +38,15 @@ export function buildDocDefinition(
       {
         columns: [
           {
-            width: 90,
+            width: 110,
             stack: [
               logoBase64
-                ? { image: logoBase64, width: 72, height: 72, alignment: "left" }
+                ? { image: logoBase64, width: 96, height: 96, alignment: "left" }
                 : {
                     text: "[LOGO]",
-                    fontSize: 11,
-                    color: "#bbb",
-                    margin: [0, 24, 0, 0],
+                    fontSize: 10,
+                    color: "#999",
+                    margin: [0, 32, 0, 0],
                   },
             ],
           },
@@ -56,32 +57,32 @@ export function buildDocDefinition(
                 text: kosData.namaKos,
                 fontSize: 14,
                 bold: true,
-                color: "#1e293b",
+                color: "#000000",
                 alignment: "right",
               },
               {
                 text: kosData.alamat,
                 fontSize: 9,
-                color: "#64748b",
+                color: "#333333",
                 alignment: "right",
-                lineHeight: 1.5,
+                lineHeight: 1.4,
                 margin: [0, 4, 0, 0],
               },
               {
                 text: kosData.kontak,
                 fontSize: 9,
-                color: "#64748b",
+                color: "#333333",
                 alignment: "right",
                 margin: [0, 2, 0, 0],
               },
             ],
           },
         ],
-        margin: [0, 0, 0, 20],
+        margin: [0, 0, 0, 24],
       },
       {
         canvas: [
-          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 2, lineColor: "#0d9488" },
+          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 1, lineColor: "#000000" },
         ],
         margin: [0, 0, 0, 28],
       },
@@ -89,25 +90,25 @@ export function buildDocDefinition(
       // ── TITLE ──
       {
         text: "INVOICE",
-        fontSize: 28,
+        fontSize: 22,
         bold: true,
-        color: "#0f172a",
+        color: "#000000",
         alignment: "center",
-        margin: [0, 0, 0, 28],
+        margin: [0, 0, 0, 24],
       },
 
-      // ── INFO 3-COLUMN ──
+      // ── INFO ROW ──
       {
         columns: [
           {
-            width: "auto",
+            width: "*",
             stack: [
-              { text: "No. Invoice", fontSize: 9, color: "#94a3b8", bold: true },
+              { text: "No. Invoice", fontSize: 8, color: "#666666", bold: true },
               {
                 text: data.invoiceNumber,
-                fontSize: 13,
+                fontSize: 11,
                 bold: true,
-                color: "#0f172a",
+                color: "#000000",
                 margin: [0, 2, 0, 0],
               },
             ],
@@ -115,52 +116,46 @@ export function buildDocDefinition(
           {
             width: "*",
             stack: [
-              { text: "Tanggal", fontSize: 9, color: "#94a3b8", bold: true, alignment: "center" },
+              { text: "Tanggal", fontSize: 8, color: "#666666", bold: true, alignment: "center" },
               {
                 text: data.tanggal,
-                fontSize: 12,
-                color: "#1e293b",
+                fontSize: 10,
+                color: "#000000",
                 alignment: "center",
                 margin: [0, 2, 0, 0],
               },
             ],
           },
           {
-            width: "auto",
+            width: "*",
             stack: [
-              { text: "Jatuh Tempo", fontSize: 9, color: "#94a3b8", bold: true, alignment: "right" },
+              { text: "Jatuh Tempo", fontSize: 8, color: "#666666", bold: true, alignment: "right" },
               {
                 text: data.jatuhTempo,
-                fontSize: 12,
-                color: "#1e293b",
+                fontSize: 10,
+                color: "#000000",
                 alignment: "right",
                 margin: [0, 2, 0, 0],
               },
             ],
           },
         ],
-        margin: [0, 0, 0, 28],
+        margin: [0, 0, 0, 24],
       },
 
-      // ── KEPADA ──
+      // ── CUSTOMER ──
       {
-        canvas: [
-          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 0.5, lineColor: "#e2e8f0" },
-        ],
-        margin: [0, 0, 0, 14],
+        text: "Kepada Yth.",
+        fontSize: 9,
+        color: "#666666",
+        bold: true,
+        margin: [0, 0, 0, 4],
       },
-      { text: "Kepada Yth.", fontSize: 10, color: "#64748b", bold: true, margin: [0, 0, 0, 4] },
       {
         text: `${data.namaPenyewa}  ·  Kamar ${data.nomorKamar}`,
-        fontSize: 13,
+        fontSize: 12,
         bold: true,
-        color: "#0f172a",
-        margin: [0, 0, 0, 14],
-      },
-      {
-        canvas: [
-          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 0.5, lineColor: "#e2e8f0" },
-        ],
+        color: "#000000",
         margin: [0, 0, 0, 20],
       },
 
@@ -173,43 +168,43 @@ export function buildDocDefinition(
             [
               {
                 text: "Deskripsi",
-                fontSize: 10,
+                fontSize: 9,
                 bold: true,
-                color: "#475569",
-                fillColor: "#f1f5f9",
-                margin: [10, 10, 10, 10],
+                color: "#000000",
+                fillColor: "#f5f5f5",
+                margin: [8, 8, 8, 8],
               },
               {
                 text: "Jumlah",
-                fontSize: 10,
+                fontSize: 9,
                 bold: true,
-                color: "#475569",
+                color: "#000000",
                 alignment: "right",
-                fillColor: "#f1f5f9",
-                margin: [10, 10, 10, 10],
+                fillColor: "#f5f5f5",
+                margin: [8, 8, 8, 8],
               },
             ],
             [
               {
                 text: `Bayar Kos · ${data.periode}`,
-                fontSize: 12,
-                color: "#1e293b",
-                margin: [10, 12, 10, 12],
+                fontSize: 10,
+                color: "#000000",
+                margin: [8, 10, 8, 10],
               },
               {
                 text: formatRupiah(data.nominal),
-                fontSize: 12,
-                color: "#1e293b",
+                fontSize: 10,
+                color: "#000000",
                 alignment: "right",
-                margin: [10, 12, 10, 12],
+                margin: [8, 10, 8, 10],
               },
             ],
           ],
         },
         layout: {
-          hLineWidth: () => 0.5,
+          hLineWidth: (i: number) => (i === 0 || i === 1 ? 0.5 : 0),
           vLineWidth: () => 0,
-          hLineColor: "#e2e8f0",
+          hLineColor: "#000000",
           paddingLeft: () => 0,
           paddingRight: () => 0,
           paddingTop: () => 0,
@@ -227,19 +222,19 @@ export function buildDocDefinition(
             [
               {
                 text: "TOTAL",
-                fontSize: 13,
+                fontSize: 11,
                 bold: true,
-                color: "#0f172a",
+                color: "#000000",
                 alignment: "right",
-                margin: [0, 14, 10, 14],
+                margin: [0, 10, 8, 10],
               },
               {
                 text: formatRupiah(data.nominal),
-                fontSize: 13,
+                fontSize: 11,
                 bold: true,
-                color: "#0f172a",
+                color: "#000000",
                 alignment: "right",
-                margin: [0, 14, 10, 14],
+                margin: [0, 10, 8, 10],
               },
             ],
           ],
@@ -247,19 +242,19 @@ export function buildDocDefinition(
         layout: {
           hLineWidth: () => 0.5,
           vLineWidth: () => 0,
-          hLineColor: "#0d9488",
+          hLineColor: "#000000",
           paddingLeft: () => 0,
           paddingRight: () => 0,
           paddingTop: () => 0,
           paddingBottom: () => 0,
         },
-        margin: [0, 0, 0, 24],
+        margin: [0, 0, 0, 28],
       },
 
       // ── PEMISAH ──
       {
         canvas: [
-          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 0.5, lineColor: "#cbd5e1" },
+          { type: "line", x1: 0, y1: 0, x2: 497, y2: 0, lineWidth: 0.5, lineColor: "#999999" },
         ],
         margin: [0, 0, 0, 20],
       },
@@ -267,21 +262,21 @@ export function buildDocDefinition(
       // ── INFO BANK ──
       {
         stack: [
-          { text: "PEMBAYARAN", fontSize: 9, bold: true, color: "#64748b", margin: [0, 0, 0, 6] },
+          { text: "PEMBAYARAN", fontSize: 9, bold: true, color: "#666666", margin: [0, 0, 0, 6] },
           {
             text: `Transfer ke ${kosData.bank}`,
-            fontSize: 11,
-            color: "#1e293b",
+            fontSize: 10,
+            color: "#000000",
           },
           {
             text: "Harap konfirmasi setelah melakukan pembayaran.",
             fontSize: 9,
-            color: "#94a3b8",
+            color: "#999999",
             italics: true,
             margin: [0, 4, 0, 0],
           },
         ],
-        margin: [0, 0, 0, 32],
+        margin: [0, 0, 0, 28],
       },
 
       // ── SIGNATURE ──
@@ -289,44 +284,81 @@ export function buildDocDefinition(
         columns: [
           { width: "*", text: "" },
           {
-            width: 180,
+            width: 200,
             stack: [
               {
                 text: "Hormat kami,",
                 alignment: "center",
-                color: "#64748b",
+                color: "#666666",
                 fontSize: 10,
-                margin: [0, 0, 0, 10],
+                margin: [0, 0, 0, 8],
+              },
+              {
+                canvas: [
+                  {
+                    type: "line",
+                    x1: 20,
+                    y1: 0,
+                    x2: 180,
+                    y2: 0,
+                    lineWidth: 0.5,
+                    lineColor: "#666666",
+                    dash: { length: 4, space: 2 },
+                  },
+                ],
+                margin: [0, 0, 0, 12],
               },
               ttdBase64
                 ? {
-                    image: ttdBase64,
-                    width: 110,
-                    height: 44,
-                    alignment: "center",
-                    margin: [0, 0, 0, 6],
+                    stack: [
+                      {
+                        image: ttdBase64,
+                        width: 160,
+                        height: 58,
+                        alignment: "center",
+                        margin: [0, -28, 0, 0],
+                      },
+                      {
+                        text: kosData.pemilik,
+                        alignment: "center",
+                        bold: true,
+                        fontSize: 11,
+                        color: "#000000",
+                        margin: [0, 2, 0, 2],
+                      },
+                      {
+                        text: `Pemilik ${kosData.namaKos}`,
+                        alignment: "center",
+                        color: "#666666",
+                        fontSize: 9,
+                      },
+                    ],
                   }
                 : {
-                    text: "[TANDA TANGAN]",
-                    color: "#bbb",
-                    fontSize: 10,
-                    alignment: "center",
-                    margin: [0, 28, 0, 6],
+                    stack: [
+                      {
+                        text: "[TANDA TANGAN]",
+                        color: "#999",
+                        fontSize: 10,
+                        alignment: "center",
+                        margin: [0, 24, 0, 6],
+                      },
+                      {
+                        text: kosData.pemilik,
+                        alignment: "center",
+                        bold: true,
+                        fontSize: 11,
+                        color: "#000000",
+                        margin: [0, 0, 0, 2],
+                      },
+                      {
+                        text: `Pemilik ${kosData.namaKos}`,
+                        alignment: "center",
+                        color: "#666666",
+                        fontSize: 9,
+                      },
+                    ],
                   },
-              {
-                text: kosData.pemilik,
-                alignment: "center",
-                bold: true,
-                fontSize: 12,
-                color: "#0f172a",
-                margin: [0, 0, 0, 2],
-              },
-              {
-                text: `Pemilik ${kosData.namaKos}`,
-                alignment: "center",
-                color: "#64748b",
-                fontSize: 10,
-              },
             ],
           },
         ],
@@ -338,26 +370,26 @@ export function buildDocDefinition(
       stack: [
         {
           canvas: [
-            { type: "line", x1: 56, y1: 0, x2: 553, y2: 0, lineWidth: 0.5, lineColor: "#cbd5e1" },
+            { type: "line", x1: 56, y1: 0, x2: 553, y2: 0, lineWidth: 0.5, lineColor: "#999999" },
           ],
-          margin: [0, 0, 0, 6],
+          margin: [0, 0, 0, 4],
         },
         {
           columns: [
             {
               text: `${kosData.namaKos}  |  ${kosData.kontak}`,
-              color: "#94a3b8",
+              color: "#999999",
               fontSize: 8,
               alignment: "left",
             },
             {
               text: `Hal ${currentPage} / ${pageCount}`,
-              color: "#94a3b8",
+              color: "#999999",
               fontSize: 8,
               alignment: "right",
             },
           ],
-          margin: [56, 0, 56, 12],
+          margin: [56, 0, 56, 8],
         },
       ],
     }),

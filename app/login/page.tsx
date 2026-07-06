@@ -36,16 +36,16 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-gradient-to-b from-slate-50 to-white px-4">
+    <div className="flex min-h-dvh items-center justify-center bg-white px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shadow-sm mx-auto mb-4">
+          <div className="w-14 h-14 mx-auto mb-4 bg-gray-900 rounded flex items-center justify-center">
             <svg
-              className="w-6 h-6 text-white"
+              className="w-7 h-7 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.5}
             >
               <path
                 strokeLinecap="round"
@@ -54,18 +54,18 @@ export default function LoginPage() {
               />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-slate-800">Invoice Kos</h1>
-          <p className="text-sm text-slate-500 mt-1">Masuk untuk melanjutkan</p>
+          <h1 className="text-xl font-bold text-gray-900">Kost Babe Aji</h1>
+          <p className="text-sm text-gray-500 mt-1">Masuk untuk membuat invoice</p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4"
+          className="bg-white border border-gray-200 rounded-lg p-6 space-y-4"
         >
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label
               htmlFor="username"
-              className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+              className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
             >
               Username
             </label>
@@ -75,15 +75,15 @@ export default function LoginPage() {
               placeholder="Masukkan username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
               required
             />
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label
               htmlFor="password"
-              className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+              className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
             >
               Password
             </label>
@@ -93,13 +93,13 @@ export default function LoginPage() {
               placeholder="Masukkan password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
               required
             />
           </div>
 
           {error && (
-            <div className="text-sm text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3">
+            <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2.5">
               {error}
             </div>
           )}
@@ -107,7 +107,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:bg-emerald-300 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+            className="w-full py-3 px-4 rounded bg-gray-900 hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-400 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

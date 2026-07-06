@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
     const [logoBase64, ttdBase64] = await Promise.all([
       readImageAsBase64("logo.png"),
-      readImageAsBase64("ttd.png"),
+      readImageAsBase64("ttd-kos-fix.png"),
     ])
 
     const docDefinition = buildDocDefinition(data, logoBase64, ttdBase64)

@@ -88,11 +88,11 @@ export default function InvoiceForm() {
   const displayNominal = form.nominal ? formatNominal(form.nominal) : ""
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-5">
-      <div className="space-y-1.5">
+    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-4">
+      <div className="space-y-1">
         <label
           htmlFor="tanggal"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
           Tanggal Invoice
         </label>
@@ -101,16 +101,16 @@ export default function InvoiceForm() {
           type="date"
           value={form.tanggal}
           onChange={(e) => setForm((p) => ({ ...p, tanggal: e.target.value }))}
-          className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <label
           htmlFor="namaPenyewa"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
-          Nama Penyewa <span className="text-rose-400">*</span>
+          Nama Penyewa
         </label>
         <input
           id="namaPenyewa"
@@ -118,17 +118,17 @@ export default function InvoiceForm() {
           placeholder="cth: Budi Santoso"
           value={form.namaPenyewa}
           onChange={(e) => setForm((p) => ({ ...p, namaPenyewa: e.target.value }))}
-          className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
           required
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <label
           htmlFor="nomorKamar"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
-          Nomor Kamar <span className="text-rose-400">*</span>
+          Nomor Kamar
         </label>
         <input
           id="nomorKamar"
@@ -136,15 +136,15 @@ export default function InvoiceForm() {
           placeholder="cth: 3A"
           value={form.nomorKamar}
           onChange={(e) => setForm((p) => ({ ...p, nomorKamar: e.target.value }))}
-          className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
           required
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <label
           htmlFor="periode"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
           Periode Pembayaran
         </label>
@@ -154,52 +154,50 @@ export default function InvoiceForm() {
           placeholder={getDefaultPeriode()}
           value={form.periode}
           onChange={(e) => setForm((p) => ({ ...p, periode: e.target.value }))}
-          className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <label
           htmlFor="nominal"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
-          Nominal <span className="text-rose-400">*</span>
+          Nominal
         </label>
         <div className="relative">
-          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-slate-500 font-medium">
-            Rp
-          </span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">Rp</span>
           <input
             id="nominal"
             type="text"
             placeholder="1.500.000"
             value={displayNominal ? `Rp ${displayNominal}` : ""}
             onChange={handleNominalChange}
-            className="w-full pl-11 pr-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+            className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-gray-500 transition-colors"
             required
           />
         </div>
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <label
           htmlFor="jatuhTempo"
-          className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest"
+          className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider"
         >
-          Jatuh Tempo <span className="text-rose-400">*</span>
+          Jatuh Tempo
         </label>
         <input
           id="jatuhTempo"
           type="date"
           value={form.jatuhTempo}
           onChange={(e) => setForm((p) => ({ ...p, jatuhTempo: e.target.value }))}
-          className="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-shadow shadow-sm"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white focus:outline-none focus:border-gray-500 transition-colors"
           required
         />
       </div>
 
       {errorMsg && (
-        <div className="text-sm text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3">
+        <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2.5">
           {errorMsg}
         </div>
       )}
@@ -207,7 +205,7 @@ export default function InvoiceForm() {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:bg-emerald-300 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+        className="w-full py-3 px-4 rounded bg-gray-900 hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-400 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {state === "loading" ? (
           <>
@@ -218,7 +216,7 @@ export default function InvoiceForm() {
             Memproses...
           </>
         ) : state === "success" ? (
-          "✓ PDF Terunduh!"
+          "✓ PDF Terunduh"
         ) : (
           "Download PDF"
         )}
