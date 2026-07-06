@@ -46,12 +46,17 @@ async function readImageAsBase64(relativePath: string): Promise<string | null> {
   }
 }
 
+const ROMAN: Record<number, string> = {
+  1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI",
+  7: "VII", 8: "VIII", 9: "IX", 10: "X", 11: "XI", 12: "XII",
+}
+
 function generateInvoiceNumber(tanggal: string): string {
   const d = new Date(tanggal + "T00:00:00")
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, "0")
   const day = String(d.getDate()).padStart(2, "0")
-  return `INV-${y}${m}${day}`
+  const month = ROMAN[d.getMonth() + 1] || "I"
+  const year = d.getFullYear()
+  return `${day}-${month}-${year}`
 }
 
 export async function POST(request: NextRequest) {
