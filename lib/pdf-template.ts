@@ -95,7 +95,7 @@ export function buildDocDefinition(
           {
             width: "50%",
             stack: [
-              { text: "BILL TO", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 4] },
+              { text: "TAGIHAN KEPADA", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 4] },
               { text: data.namaPenyewa, fontSize: 11, bold: true, color: navyBlue },
               { text: `Kamar ${data.nomorKamar}`, fontSize: 10, margin: [0, 2, 0, 0] },
             ],
@@ -105,21 +105,21 @@ export function buildDocDefinition(
             stack: [
               {
                 columns: [
-                  { text: "INVOICE NO.", width: 100, fontSize: 9, bold: true, color: orange },
+                  { text: "NO. INVOICE", width: 100, fontSize: 9, bold: true, color: orange },
                   { text: data.invoiceNumber, width: "*", fontSize: 10, alignment: "right", bold: true, color: navyBlue },
                 ],
                 margin: [0, 0, 0, 4],
               },
               {
                 columns: [
-                  { text: "INVOICE DATE", width: 100, fontSize: 9, bold: true, color: orange },
+                  { text: "TANGGAL", width: 100, fontSize: 9, bold: true, color: orange },
                   { text: data.tanggal, width: "*", fontSize: 10, alignment: "right" },
                 ],
                 margin: [0, 0, 0, 4],
               },
               {
                 columns: [
-                  { text: "DUE DATE", width: 100, fontSize: 9, bold: true, color: orange },
+                  { text: "JATUH TEMPO", width: 100, fontSize: 9, bold: true, color: orange },
                   { text: data.jatuhTempo, width: "*", fontSize: 10, alignment: "right" },
                 ],
               },
@@ -137,15 +137,20 @@ export function buildDocDefinition(
           body: [
             [
               { text: "QTY", fontSize: 9, bold: true, color: navyBlue, alignment: "center" },
-              { text: "DESCRIPTION", fontSize: 9, bold: true, color: navyBlue },
-              { text: "UNIT PRICE", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
-              { text: "AMOUNT", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
+              { text: "DESKRIPSI", fontSize: 9, bold: true, color: navyBlue },
+              { text: "HARGA", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
+              { text: "TOTAL", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
             ],
             [
-              { text: "1", fontSize: 10, alignment: "center" },
-              { text: `Bayar Kos · ${data.periode}`, fontSize: 10 },
-              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right" },
-              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right" },
+              { text: "1", fontSize: 10, alignment: "center", margin: [0, 2, 0, 0] },
+              {
+                stack: [
+                  { text: "Pembayaran Sewa Kamar Kos", fontSize: 10, bold: true, color: textDark },
+                  { text: `Periode: ${data.periode}`, fontSize: 9, color: textLight, margin: [0, 2, 0, 0] },
+                ],
+              },
+              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 2, 0, 0] },
+              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 2, 0, 0] },
             ],
           ],
         },
@@ -203,11 +208,11 @@ export function buildDocDefinition(
           {
             width: "*",
             stack: [
-              { text: "TERMS & CONDITIONS", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 6] },
-              { text: `Payment is due by ${data.jatuhTempo}`, fontSize: 9, margin: [0, 0, 0, 2] },
-              { text: `Please make checks/transfer payable to:`, fontSize: 9, margin: [0, 0, 0, 2] },
+              { text: "SYARAT & KETENTUAN", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 6] },
+              { text: `Pembayaran paling lambat tanggal ${data.jatuhTempo}`, fontSize: 9, margin: [0, 0, 0, 2] },
+              { text: `Pembayaran dapat ditransfer ke rekening berikut:`, fontSize: 9, margin: [0, 0, 0, 2] },
               { text: kosData.bank, fontSize: 9, bold: true, color: navyBlue, margin: [0, 0, 0, 12] },
-              { text: "Thank you for your business!", fontSize: 11, bold: true, italics: true, color: navyBlue },
+              { text: "Terima kasih atas kepercayaannya!", fontSize: 11, bold: true, italics: true, color: navyBlue },
             ],
             margin: [0, 12, 0, 0],
           },
