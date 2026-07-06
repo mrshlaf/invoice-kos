@@ -54,7 +54,6 @@ export function buildDocDefinition(
                 fontSize: 28,
                 bold: true,
                 color: navyBlue,
-                letterSpacing: 2,
                 margin: [0, 0, 0, 12],
               },
               {
