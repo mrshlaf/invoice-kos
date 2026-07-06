@@ -115,7 +115,7 @@ export default function InvoiceForm() {
         <input
           id="namaPenyewa"
           type="text"
-          placeholder="cth: Budi Santoso"
+          placeholder="cth: Marshal Aufa"
           value={form.namaPenyewa}
           onChange={(e) => setForm((p) => ({ ...p, namaPenyewa: e.target.value }))}
           className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
