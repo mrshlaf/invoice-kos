@@ -12,7 +12,7 @@ export interface InvoiceFormData {
 }
 
 function formatRupiah(amount: number): string {
-  return "Rp " + amount.toLocaleString("id-ID")
+  return "Rp " + amount.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 function formatNumber(amount: number): string {
