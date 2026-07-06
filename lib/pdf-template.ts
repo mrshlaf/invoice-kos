@@ -222,7 +222,7 @@ export function buildDocDefinition(
                     margin: [0, 0, 0, 8],
                   }
                 : {
-                    text: "[TANDA TANGAN]",
+                    text: "[CAP LUNAS]",
                     color: textLight,
                     fontSize: 10,
                     alignment: "right",
