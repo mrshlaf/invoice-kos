@@ -1,0 +1,164 @@
+====================================================================
+PRD - INVOICE GENERATOR KOS
+====================================================================
+Versi        : 1.0
+Tanggal      : 06 Juli 2026
+Dibuat untuk : Marshal (developer) & Syifa (requester)
+Tujuan       : Mempermudah ayah Syifa membuat invoice pembayaran kos
+               bulanan untuk penyewa, tanpa input manual berulang
+               untuk logo & tanda tangan.
+
+--------------------------------------------------------------------
+1. LATAR BELAKANG
+--------------------------------------------------------------------
+Saat ini invoice pembayaran kos dibuat manual (pakai invoice generator
+di Google). Prosesnya dirasa repot karena logo dan tanda tangan harus
+dimasukkan ulang setiap kali membuat invoice baru. Dibutuhkan web
+sederhana yang otomatis menempelkan logo & ttd, sehingga user hanya
+perlu mengisi data transaksi (tanggal, nama penyewa, kamar, deskripsi,
+nominal) lalu mengunduh invoice dalam format PDF.
+
+--------------------------------------------------------------------
+2. TUJUAN PRODUK
+--------------------------------------------------------------------
+- Membuat 1 halaman web (bukan aplikasi) untuk generate invoice kos.
+- User (ayah) hanya mengisi field yang berubah tiap transaksi.
+- Logo & tanda tangan bersifat STATIS (aset tetap di folder project,
+  tidak diupload ulang lewat UI setiap kali).
+- Output akhir berupa file PDF yang bisa diunduh/dicetak.
+- Tampilan simpel, tidak perlu fitur pajak/diskon/PO number.
+
+--------------------------------------------------------------------
+3. PIHAK & ALUR
+--------------------------------------------------------------------
+- Penerbit invoice : Ayah Syifa (pemilik kos) - identitas & alamat kos
+  bersifat TETAP (hardcode di template, tidak perlu diinput ulang).
+- Penerima invoice : Penyewa kos (nama & nomor kamar diinput manual
+  setiap kali, karena penyewa/kamar bisa berbeda tiap transaksi).
+- Alur pemakaian:
+  1. User membuka web.
+  2. User mengisi form: tanggal, nama penyewa, nomor kamar, deskripsi,
+     nominal, jatuh tempo (due date).
+  3. User klik "Generate/Download Invoice".
+  4. Sistem menyusun invoice dengan logo & ttd statis + data form.
+  5. File PDF otomatis terunduh.
+
+--------------------------------------------------------------------
+4. SCOPE FITUR (MVP - HARUS ADA)
+--------------------------------------------------------------------
+4.1 Form Input (satu halaman, sederhana):
+    - Tanggal invoice (date picker, default: hari ini)
+    - Nama penyewa (text input)
+    - Nomor kamar (text input)
+    - Deskripsi (text input, default/contoh: "Pembayaran kos bulan
+      Juli 2026" - user bisa edit bebas)
+    - Nominal (number input, default value: Rp 1.500.000, bisa diedit
+      manual kalau beda)
+    - Jatuh tempo / due date (date picker)
+
+4.2 Data Statis/Tetap (TIDAK ada di form, sudah fix di kode/template):
+    - Nama pemilik kos (ayah Syifa)
+    - Alamat kos
+    - Logo kos (file gambar, taruh di folder assets project,
+      misal: /assets/logo.png)
+    - Tanda tangan (file gambar, taruh di folder assets project,
+      misal: /assets/ttd.png)
+    - Placeholder logo & ttd disiapkan dulu oleh developer sebelum
+      file asli dari user tersedia; tinggal ganti file saat sudah ada.
+
+4.3 Layout Invoice (PDF):
+    - Bahasa: Indonesia sepenuhnya (label "Invoice", "Tanggal",
+      "Kepada", "Deskripsi", "Jumlah", "Jatuh Tempo", dst pakai
+      istilah Indonesia yang natural).
+    - Logo ditampilkan di bagian atas invoice, posisi kiri atau kanan
+      (bebas, ikuti estetika layout, tidak perlu bisa diubah user).
+    - TIDAK ada kolom/field: pajak, diskon, nomor PO (P.O#).
+    - ADA kolom jatuh tempo (due date) menggantikan P.O#.
+    - Bagian bawah invoice: tanda tangan (gambar statis) + boleh
+      ditambahkan footer singkat (misal nama kos/kontak/ucapan
+      terima kasih) - opsional, styling bebas mengikuti desain.
+    - Tabel/daftar item: cukup 1 baris (deskripsi + nominal), tidak
+      perlu multi-item kompleks karena kasusnya simpel (bayar kos
+      bulanan).
+    - Total nominal ditampilkan jelas, format Rupiah (Rp) dengan
+      separator ribuan (misal Rp 1.500.000).
+
+4.4 Output:
+    - Tombol "Download PDF" -> menghasilkan file PDF siap diunduh.
+    - Ukuran kertas: bebas (disarankan A4 sebagai default umum).
+    - Nama file PDF disarankan otomatis, misal:
+      invoice_[nama-penyewa]_[tanggal].pdf
+
+--------------------------------------------------------------------
+5. OUT OF SCOPE (TIDAK DIPERLUKAN DI MVP INI)
+--------------------------------------------------------------------
+- Tidak perlu sistem login/akun.
+- Tidak perlu database riwayat invoice (kecuali diminta di iterasi
+  berikutnya).
+- Tidak perlu upload logo/ttd lewat UI (statis di folder project).
+- Tidak perlu perhitungan pajak, diskon, atau multi-currency.
+- Tidak perlu nomor invoice otomatis / auto-increment (kecuali nanti
+  diminta menyusul).
+- Tidak perlu multi-item/multi-baris transaksi kompleks.
+- Tidak perlu versi mobile app - cukup web (bisa dibuka dari HP via
+  browser).
+
+--------------------------------------------------------------------
+6. KEBUTUHAN TEKNIS
+--------------------------------------------------------------------
+- Framework: Next.js (single page, tidak perlu banyak routing -
+  cukup 1 halaman utama untuk form + generate invoice).
+- Tidak pakai database sama sekali - semua data form hanya dipakai
+  sementara di state React (client-side), langsung diproses jadi
+  PDF, tidak disimpan/tidak ada riwayat.
+- Library generate PDF di sisi client, contoh: jsPDF, html2pdf.js,
+  atau react-pdf (developer bebas pilih sesuai kenyamanan, yang
+  penting proses generate PDF terjadi di browser/client-side).
+- Aset logo & ttd disimpan sebagai file gambar statis di folder
+  project Next.js (contoh path: /public/logo.png, /public/ttd.png),
+  dipanggil langsung oleh komponen invoice tanpa proses upload.
+- Tidak butuh backend/server/API route kompleks - cukup static
+  page + client-side rendering & PDF generation.
+
+--------------------------------------------------------------------
+7. DESAIN / STYLING
+--------------------------------------------------------------------
+- Gaya desain: MINIMALIS.
+  - Warna terbatas (1-2 warna aksen + putih/abu netral), hindari
+    warna ramai atau gradient mencolok.
+  - Tipografi bersih, sans-serif, hierarki jelas (judul "INVOICE"
+    lebih besar, label lebih kecil/abu-abu, isi data lebih tegas).
+  - Banyak whitespace, tidak padat, tidak ada elemen dekoratif yang
+    tidak perlu (tanpa border berlebihan, tanpa background pattern).
+  - Layout form di web juga simpel: 1 kolom, field berurutan rapi,
+    tombol "Download PDF" jelas terlihat (misal warna aksen solid).
+  - Layout invoice PDF: header (logo + judul invoice), info penyewa
+    & tanggal/jatuh tempo, satu baris deskripsi & nominal, lalu
+    tanda tangan di bawah, footer opsional kecil di paling bawah.
+  - Styling bisa pakai Tailwind CSS (umum dipakai di Next.js) untuk
+    mempercepat pembuatan tampilan minimalis & rapi.
+
+--------------------------------------------------------------------
+8. KRITERIA SUKSES (DEFINITION OF DONE)
+--------------------------------------------------------------------
+- User bisa mengisi form (tanggal, nama penyewa, kamar, deskripsi,
+  nominal, jatuh tempo) dan mengunduh invoice PDF dalam < 30 detik.
+- Logo & tanda tangan otomatis muncul di invoice tanpa input ulang.
+- Tampilan invoice rapi, dalam Bahasa Indonesia, tanpa elemen yang
+  tidak diperlukan (pajak/diskon/PO#).
+- File PDF hasil unduhan bisa langsung dicetak/dikirim ke penyewa.
+
+--------------------------------------------------------------------
+9. PERTANYAAN TERBUKA / UNTUK DIKONFIRMASI SAAT DEV
+--------------------------------------------------------------------
+- Ukuran & posisi pasti logo di header (developer bebas eksplorasi
+  desain, tidak ada batasan ketat dari user).
+- Isi footer (jika dipakai) - teks apa yang mau ditampilkan
+  (misal alamat/kontak/no rekening) - default: dikosongkan/simple
+  dulu, bisa ditambah user setelah preview pertama.
+- File logo & ttd asli menyusul dari user (Syifa masih menyiapkan);
+  gunakan placeholder sementara saat development.
+
+====================================================================
+END OF PRD
+====================================================================
