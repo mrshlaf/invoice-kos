@@ -101,7 +101,7 @@ export default function InvoiceForm() {
           type="date"
           value={form.tanggal}
           onChange={(e) => setForm((p) => ({ ...p, tanggal: e.target.value }))}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
         />
       </div>
 
@@ -115,10 +115,10 @@ export default function InvoiceForm() {
         <input
           id="namaPenyewa"
           type="text"
-          placeholder="cth: Mouza Ayesha Chana"
+          placeholder="cth: Budi Santoso"
           value={form.namaPenyewa}
           onChange={(e) => setForm((p) => ({ ...p, namaPenyewa: e.target.value }))}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
           required
         />
       </div>
@@ -136,7 +136,7 @@ export default function InvoiceForm() {
           placeholder="cth: 3A"
           value={form.nomorKamar}
           onChange={(e) => setForm((p) => ({ ...p, nomorKamar: e.target.value }))}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
           required
         />
       </div>
@@ -154,7 +154,7 @@ export default function InvoiceForm() {
           placeholder={getDefaultPeriode()}
           value={form.periode}
           onChange={(e) => setForm((p) => ({ ...p, periode: e.target.value }))}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
         />
       </div>
 
@@ -173,7 +173,7 @@ export default function InvoiceForm() {
             placeholder="1.500.000"
             value={displayNominal ? `Rp ${displayNominal}` : ""}
             onChange={handleNominalChange}
-            className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+            className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
             required
           />
         </div>
@@ -191,7 +191,7 @@ export default function InvoiceForm() {
           type="date"
           value={form.jatuhTempo}
           onChange={(e) => setForm((p) => ({ ...p, jatuhTempo: e.target.value }))}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
           required
         />
       </div>

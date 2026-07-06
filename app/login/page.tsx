@@ -68,7 +68,7 @@ export default function LoginPage() {
               placeholder="Masukkan username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-[#172336] bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-[#172336] bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
               required
             />
           </div>
@@ -86,7 +86,7 @@ export default function LoginPage() {
               placeholder="Masukkan password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-[#172336] bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#172336] focus:ring-1 focus:ring-[#172336] transition-colors"
+              className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-[#172336] bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
               required
             />
           </div>
@@ -100,7 +100,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 rounded bg-[#172336] hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-400 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3 px-4 rounded bg-[#172336] hover:bg-[#1f2f4a] active:bg-[#131d2e] disabled:bg-gray-400 text-white text-sm font-semibold tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
