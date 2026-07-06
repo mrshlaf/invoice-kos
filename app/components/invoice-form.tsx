@@ -166,14 +166,13 @@ export default function InvoiceForm() {
           Nominal
         </label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">Rp</span>
           <input
             id="nominal"
             type="text"
-            placeholder="1.500.000"
+            placeholder="Rp 1.500.000"
             value={displayNominal ? `Rp ${displayNominal}` : ""}
             onChange={handleNominalChange}
-            className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
+            className="w-full px-3 py-2.5 border border-gray-300 rounded text-sm text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-[#cca373] focus:ring-1 focus:ring-[#cca373] transition-colors"
             required
           />
         </div>
