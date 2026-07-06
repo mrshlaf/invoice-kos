@@ -144,8 +144,8 @@ export function buildDocDefinition(
             [
               { text: "1", fontSize: 10, alignment: "center" },
               { text: `Bayar Kos · ${data.periode}`, fontSize: 10 },
-              { text: formatNumber(data.nominal), fontSize: 10, alignment: "right" },
-              { text: formatNumber(data.nominal), fontSize: 10, alignment: "right" },
+              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right" },
+              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right" },
             ],
           ],
         },
@@ -177,7 +177,7 @@ export function buildDocDefinition(
               body: [
                 [
                   { text: "Subtotal", fontSize: 10, margin: [0, 4, 16, 4], alignment: "right" },
-                  { text: formatNumber(data.nominal), fontSize: 10, alignment: "right", margin: [0, 4, 0, 4] },
+                  { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 4, 0, 4] },
                 ],
                 [
                   { text: "TOTAL", fontSize: 12, bold: true, color: navyBlue, margin: [0, 8, 16, 4], alignment: "right" },
