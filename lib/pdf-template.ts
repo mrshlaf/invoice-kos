@@ -80,9 +80,9 @@ export function buildDocDefinition(
               logoBase64
                 ? { image: logoBase64, width: 140, alignment: "right" }
                 : {
-                    text: "",
-                    alignment: "right",
-                  },
+                  text: "",
+                  alignment: "right",
+                },
             ],
           },
         ],
@@ -209,7 +209,6 @@ export function buildDocDefinition(
             width: "*",
             stack: [
               { text: "SYARAT & KETENTUAN", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 6] },
-              { text: `Pembayaran paling lambat tanggal ${data.jatuhTempo}`, fontSize: 9, margin: [0, 0, 0, 2] },
               { text: `Pembayaran dapat ditransfer ke rekening berikut:`, fontSize: 9, margin: [0, 0, 0, 2] },
               { text: kosData.bank, fontSize: 9, bold: true, color: navyBlue, margin: [0, 0, 0, 12] },
               { text: "Terima kasih atas kepercayaannya!", fontSize: 11, bold: true, italics: true, color: navyBlue },
@@ -221,18 +220,18 @@ export function buildDocDefinition(
             stack: [
               ttdBase64
                 ? {
-                    image: ttdBase64,
-                    width: 120,
-                    alignment: "right",
-                    margin: [0, 0, 0, 8],
-                  }
+                  image: ttdBase64,
+                  width: 120,
+                  alignment: "right",
+                  margin: [0, 0, 0, 8],
+                }
                 : {
-                    text: "[CAP LUNAS]",
-                    color: textLight,
-                    fontSize: 10,
-                    alignment: "right",
-                    margin: [0, 20, 0, 20],
-                  },
+                  text: "[CAP LUNAS]",
+                  color: textLight,
+                  fontSize: 10,
+                  alignment: "right",
+                  margin: [0, 20, 0, 20],
+                },
               {
                 text: kosData.pemilik,
                 alignment: "right",
