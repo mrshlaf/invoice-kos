@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from "pdfmake/interfaces"
-import { kosData } from "./data"
+import { kosData, bankInfo } from "./data"
 
 export interface InvoiceFormData {
   invoiceNumber: string
@@ -15,242 +15,430 @@ function formatRupiah(amount: number): string {
   return "Rp " + amount.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-function formatNumber(amount: number): string {
-  return amount.toLocaleString("id-ID", { minimumFractionDigits: 0, maximumFractionDigits: 2 })
-}
+const navy = "#172336"
+const gold = "#cca373"
+const creamBg = "#fdfbf7"
+const textDark = "#1e293b"
+const textLight = "#64748b"
+const textMuted = "#94a3b8"
 
 export function buildDocDefinition(
   data: InvoiceFormData,
   logoBase64: string | null,
   ttdBase64: string | null
 ): TDocumentDefinitions {
-  const navyBlue = "#172336" // navy from logo
-  const orange = "#172336" // gold from logo
-  const textDark = "#1e293b" // slate-800
-  const textLight = "#64748b" // slate-500
-
   return {
     pageSize: "A4",
-    pageMargins: [40, 40, 40, 40],
+    pageMargins: [0, 0, 0, 0],
     defaultStyle: {
       font: "Roboto",
       fontSize: 10,
-      lineHeight: 1.3,
+      lineHeight: 1.35,
       color: textDark,
     },
     info: {
-      title: `INV-${data.invoiceNumber} - ${data.namaPenyewa}`,
+      title: `${data.invoiceNumber} - ${data.namaPenyewa}`,
       author: kosData.pemilik,
     },
     content: [
-      // ── HEADER ──
-      {
-        columns: [
-          {
-            width: "*",
-            stack: [
-              {
-                text: "INVOICE",
-                fontSize: 28,
-                bold: true,
-                color: navyBlue,
-                margin: [0, 0, 0, 12],
-              },
-              {
-                text: kosData.namaKos,
-                fontSize: 11,
-                bold: true,
-                color: navyBlue,
-              },
-              {
-                text: kosData.alamat,
-                fontSize: 9,
-                margin: [0, 2, 0, 0],
-              },
-              {
-                text: kosData.kontak,
-                fontSize: 9,
-                margin: [0, 2, 0, 0],
-              },
-            ],
-          },
-          {
-            width: 100,
-            stack: [
-              logoBase64
-                ? { image: logoBase64, width: 140, alignment: "right" }
-                : {
-                    text: "",
-                    alignment: "right",
-                  },
-            ],
-          },
-        ],
-        margin: [0, 0, 0, 24],
-      },
-
-      // ── BILLING INFO ──
-      {
-        columns: [
-          {
-            width: "50%",
-            stack: [
-              { text: "TAGIHAN KEPADA", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 4] },
-              { text: data.namaPenyewa, fontSize: 11, bold: true, color: navyBlue },
-              { text: `Kamar ${data.nomorKamar}`, fontSize: 10, margin: [0, 2, 0, 0] },
-            ],
-          },
-          {
-            width: "50%",
-            stack: [
-              {
-                columns: [
-                  { text: "NO. INVOICE", width: 100, fontSize: 9, bold: true, color: orange },
-                  { text: data.invoiceNumber, width: "*", fontSize: 10, alignment: "right", bold: true, color: navyBlue },
-                ],
-                margin: [0, 0, 0, 4],
-              },
-              {
-                columns: [
-                  { text: "TANGGAL", width: 100, fontSize: 9, bold: true, color: orange },
-                  { text: data.tanggal, width: "*", fontSize: 10, alignment: "right" },
-                ],
-                margin: [0, 0, 0, 4],
-              },
-              {
-                columns: [
-                  { text: "JATUH TEMPO", width: 100, fontSize: 9, bold: true, color: orange },
-                  { text: data.jatuhTempo, width: "*", fontSize: 10, alignment: "right" },
-                ],
-              },
-            ],
-          },
-        ],
-        margin: [0, 0, 0, 24],
-      },
-
-      // ── TABLE ──
+      // ════════════════════════════════════════════
+      // 1. HEADER BANNER (full-width, navy background)
+      // ════════════════════════════════════════════
       {
         table: {
-          headerRows: 1,
-          widths: [30, "*", 100, 100],
+          widths: ["*"],
           body: [
             [
-              { text: "QTY", fontSize: 9, bold: true, color: navyBlue, alignment: "center" },
-              { text: "DESKRIPSI", fontSize: 9, bold: true, color: navyBlue },
-              { text: "HARGA", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
-              { text: "TOTAL", fontSize: 9, bold: true, color: navyBlue, alignment: "right" },
-            ],
-            [
-              { text: "1", fontSize: 10, alignment: "center", margin: [0, 2, 0, 0] },
               {
-                stack: [
-                  { text: "Pembayaran Sewa Kamar Kos", fontSize: 10, bold: true, color: textDark },
-                  { text: `Periode: ${data.periode}`, fontSize: 9, color: textLight, margin: [0, 2, 0, 0] },
+                columns: [
+                  {
+                    width: "auto",
+                    stack: [
+                      logoBase64
+                        ? {
+                            image: logoBase64,
+                            width: 42,
+                            height: 42,
+                            alignment: "left",
+                            margin: [0, 2, 14, 2],
+                          }
+                        : { text: "", margin: [0, 0, 14, 0] },
+                    ],
+                  },
+                  {
+                    width: "*",
+                    stack: [
+                      { text: "KOST BABE AJI", fontSize: 17, bold: true, color: "#ffffff", margin: [0, 0, 0, 2] },
+                    ],
+                  },
+                  {
+                    width: "auto",
+                    stack: [
+                      {
+                        text: "INVOICE",
+                        fontSize: 26,
+                        bold: true,
+                        color: "#ffffff",
+                        alignment: "right",
+                        margin: [0, 2, 0, 2],
+                      },
+                    ],
+                  },
                 ],
+                fillColor: navy,
+                margin: [0, 0, 0, 0],
               },
-              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 2, 0, 0] },
-              { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 2, 0, 0] },
             ],
           ],
         },
         layout: {
-          hLineWidth: (i, node) => {
-            if (i === 0 || i === 1) return 1.5;
-            if (i === node.table.body.length) return 1;
-            return 0.5;
-          },
+          hLineWidth: () => 0,
           vLineWidth: () => 0,
-          hLineColor: (i) => {
-            if (i === 0 || i === 1) return orange;
-            return "#cbd5e1"; // slate-300
-          },
-          paddingTop: () => 10,
-          paddingBottom: () => 10,
+          paddingLeft: () => 40,
+          paddingRight: () => 40,
+          paddingTop: () => 22,
+          paddingBottom: () => 22,
         },
-        margin: [0, 0, 0, 16],
+        margin: [0, 0, 0, 28],
       },
 
-      // ── TOTALS ──
+      // ── content wrapper (rest of page with side margins) ──
       {
-        columns: [
-          { width: "*", text: "" },
+        stack: [
+          // ════════════════════════════════════════════
+          // 2. INFO TAGIHAN (2 kolom)
+          // ════════════════════════════════════════════
           {
-            width: 240,
+            columns: [
+              {
+                width: "50%",
+                stack: [
+                  { text: "TAGIHAN KEPADA", fontSize: 9, bold: true, color: gold, margin: [0, 0, 0, 6] },
+                  { text: data.namaPenyewa, fontSize: 13, bold: true, color: navy, margin: [0, 0, 0, 2] },
+                  { text: `Kamar ${data.nomorKamar}`, fontSize: 10, color: textLight },
+                ],
+              },
+              {
+                width: "50%",
+                stack: [
+                  {
+                    columns: [
+                      { text: "No. Invoice", width: 80, fontSize: 9, bold: true, color: textLight },
+                      {
+                        text: data.invoiceNumber,
+                        width: "*",
+                        fontSize: 11,
+                        bold: true,
+                        color: navy,
+                        alignment: "right",
+                      },
+                    ],
+                    margin: [0, 0, 0, 4],
+                  },
+                  {
+                    columns: [
+                      { text: "Tanggal", width: 80, fontSize: 9, bold: true, color: textLight },
+                      { text: data.tanggal, width: "*", fontSize: 10, alignment: "right" },
+                    ],
+                    margin: [0, 0, 0, 4],
+                  },
+                  {
+                    columns: [
+                      { text: "Jatuh Tempo", width: 80, fontSize: 9, bold: true, color: textLight },
+                      { text: data.jatuhTempo, width: "*", fontSize: 10, alignment: "right" },
+                    ],
+                  },
+                ],
+              },
+            ],
+            margin: [40, 0, 40, 24],
+          },
+
+          // ════════════════════════════════════════════
+          // 3. TABEL TRANSAKSI
+          // ════════════════════════════════════════════
+          {
             table: {
+              headerRows: 1,
               widths: ["*", "auto"],
               body: [
                 [
-                  { text: "Subtotal", fontSize: 10, margin: [0, 4, 16, 4], alignment: "right" },
-                  { text: formatRupiah(data.nominal), fontSize: 10, alignment: "right", margin: [0, 4, 0, 4] },
+                  {
+                    text: "DESKRIPSI",
+                    fontSize: 10,
+                    bold: true,
+                    color: "#ffffff",
+                    fillColor: gold,
+                    margin: [12, 10, 12, 10],
+                  },
+                  {
+                    text: "JUMLAH",
+                    fontSize: 10,
+                    bold: true,
+                    color: "#ffffff",
+                    fillColor: gold,
+                    alignment: "right",
+                    margin: [12, 10, 12, 10],
+                  },
                 ],
                 [
-                  { text: "TOTAL", fontSize: 12, bold: true, color: navyBlue, margin: [0, 8, 16, 4], alignment: "right" },
-                  { text: formatRupiah(data.nominal), fontSize: 12, bold: true, color: navyBlue, alignment: "right", margin: [0, 8, 0, 4] },
+                  {
+                    stack: [
+                      { text: "Bayar Kos", fontSize: 11, bold: true, color: textDark, margin: [12, 10, 12, 0] },
+                      {
+                        text: `Periode ${data.periode}`,
+                        fontSize: 9,
+                        color: textLight,
+                        margin: [12, 2, 12, 10],
+                      },
+                    ],
+                    fillColor: creamBg,
+                  },
+                  {
+                    text: formatRupiah(data.nominal),
+                    fontSize: 11,
+                    bold: true,
+                    color: textDark,
+                    alignment: "right",
+                    margin: [12, 10, 12, 10],
+                    fillColor: creamBg,
+                  },
                 ],
               ],
             },
             layout: {
-              hLineWidth: (i) => (i === 1 ? 1.5 : 0),
+              hLineWidth: (i, node) => {
+                if (i === 0 || i === 1) return 1.5
+                return 0.5
+              },
               vLineWidth: () => 0,
-              hLineColor: () => navyBlue,
-              paddingTop: () => 4,
-              paddingBottom: () => 4,
+              hLineColor: () => gold,
+              paddingTop: () => 0,
+              paddingBottom: () => 0,
             },
+            margin: [40, 0, 40, 0],
           },
-        ],
-        margin: [0, 0, 0, 32],
-      },
 
-      // ── TERMS & SIGNATURE (SIDE BY SIDE) ──
-      {
-        columns: [
+          // ════════════════════════════════════════════
+          // 4. TOTAL
+          // ════════════════════════════════════════════
           {
-            width: "*",
-            stack: [
-              { text: "SYARAT & KETENTUAN", fontSize: 9, bold: true, color: orange, margin: [0, 0, 0, 6] },
-              { text: `Pembayaran paling lambat tanggal ${data.jatuhTempo}`, fontSize: 9, margin: [0, 0, 0, 2] },
-              { text: `Pembayaran dapat ditransfer ke rekening berikut:`, fontSize: 9, margin: [0, 0, 0, 2] },
-              { text: kosData.bank, fontSize: 9, bold: true, color: navyBlue, margin: [0, 0, 0, 12] },
-              { text: "Terima kasih atas kepercayaannya!", fontSize: 11, bold: true, italics: true, color: navyBlue },
+            columns: [
+              { width: "*", text: "" },
+              {
+                width: 220,
+                table: {
+                  widths: ["*", "auto"],
+                  body: [
+                    [
+                      {
+                        text: "TOTAL",
+                        fontSize: 13,
+                        bold: true,
+                        color: navy,
+                        alignment: "right",
+                        margin: [0, 10, 12, 10],
+                      },
+                      {
+                        text: formatRupiah(data.nominal),
+                        fontSize: 13,
+                        bold: true,
+                        color: navy,
+                        alignment: "right",
+                        margin: [0, 10, 0, 10],
+                      },
+                    ],
+                  ],
+                },
+                layout: {
+                  hLineWidth: (i) => (i === 0 ? 1.5 : 0),
+                  vLineWidth: () => 0,
+                  hLineColor: () => navy,
+                  paddingTop: () => 4,
+                  paddingBottom: () => 4,
+                },
+              },
             ],
-            margin: [0, 12, 0, 0],
+            margin: [40, 16, 40, 28],
           },
+
+          // ════════════════════════════════════════════
+          // 5. BOX INFO PEMBAYARAN + KONTAK
+          // ════════════════════════════════════════════
           {
-            width: 200,
-            stack: [
-              ttdBase64
-                ? {
-                    image: ttdBase64,
-                    width: 120,
-                    alignment: "right",
-                    margin: [0, 0, 0, 8],
-                  }
-                : {
-                    text: "[CAP LUNAS]",
-                    color: textLight,
-                    fontSize: 10,
-                    alignment: "right",
-                    margin: [0, 20, 0, 20],
+            table: {
+              widths: ["50%", "50%"],
+              body: [
+                [
+                  {
+                    stack: [
+                      { text: "INFORMASI PEMBAYARAN", fontSize: 9, bold: true, color: navy, margin: [0, 0, 0, 8] },
+                      {
+                        columns: [
+                          { text: "Metode", width: 65, color: textLight, fontSize: 9 },
+                          { text: ":  Transfer Bank", width: "*", fontSize: 10 },
+                        ],
+                        margin: [0, 0, 0, 3],
+                      },
+                      {
+                        columns: [
+                          { text: "Bank", width: 65, color: textLight, fontSize: 9 },
+                          { text: `:  ${bankInfo.name}`, width: "*", fontSize: 10 },
+                        ],
+                        margin: [0, 0, 0, 3],
+                      },
+                      {
+                        columns: [
+                          { text: "No. Rekening", width: 65, color: textLight, fontSize: 9 },
+                          { text: `:  ${bankInfo.accountNumber}`, width: "*", fontSize: 10, bold: true, color: navy },
+                        ],
+                        margin: [0, 0, 0, 3],
+                      },
+                      {
+                        columns: [
+                          { text: "a/n", width: 65, color: textLight, fontSize: 9 },
+                          { text: `:  ${bankInfo.accountName}`, width: "*", fontSize: 10, bold: true, color: textDark },
+                        ],
+                      },
+                    ],
+                    fillColor: creamBg,
                   },
+                  {
+                    stack: [
+                      { text: "KONTAK", fontSize: 9, bold: true, color: navy, margin: [0, 0, 0, 8] },
+                      {
+                        columns: [
+                          { text: "WhatsApp", width: 65, color: textLight, fontSize: 9 },
+                          { text: `:  ${kosData.kontak}`, width: "*", fontSize: 10 },
+                        ],
+                        margin: [0, 0, 0, 3],
+                      },
+                      {
+                        columns: [
+                          { text: "Kos", width: 65, color: textLight, fontSize: 9 },
+                          { text: `:  ${kosData.namaKos}`, width: "*", fontSize: 10 },
+                        ],
+                      },
+                    ],
+                    fillColor: creamBg,
+                  },
+                ],
+              ],
+            },
+            layout: {
+              hLineWidth: () => 0,
+              vLineWidth: (i, node) => (i === 1 && node.columns === 2 ? 0.5 : 0),
+              vLineColor: () => "#d1d5db",
+              paddingLeft: () => 20,
+              paddingRight: () => 20,
+              paddingTop: () => 14,
+              paddingBottom: () => 14,
+            },
+            margin: [40, 0, 40, 20],
+          },
+
+          // ════════════════════════════════════════════
+          // 6. CATATAN
+          // ════════════════════════════════════════════
+          {
+            stack: [
+              { text: "Catatan:", fontSize: 9, bold: true, color: textLight, margin: [0, 0, 0, 6] },
               {
-                text: kosData.pemilik,
-                alignment: "right",
-                bold: true,
-                fontSize: 11,
-                color: navyBlue,
-                margin: [0, 0, 0, 2],
-              },
-              {
-                text: "Pemilik Kos",
-                alignment: "right",
-                fontSize: 9,
-                color: textLight,
+                ol: [
+                  {
+                    text: "Harap konfirmasi ke WhatsApp setelah melakukan pembayaran.",
+                    fontSize: 9,
+                    color: textLight,
+                    margin: [0, 0, 0, 3],
+                  },
+                  {
+                    text: "Invoice ini sah tanpa tanda tangan basah.",
+                    fontSize: 9,
+                    color: textLight,
+                  },
+                ],
+                margin: [16, 0, 0, 0],
               },
             ],
+            margin: [40, 0, 40, 24],
+          },
+
+          // ════════════════════════════════════════════
+          // 7. TANDA TANGAN (kanan bawah)
+          // ════════════════════════════════════════════
+          {
+            columns: [
+              { width: "*", text: "" },
+              {
+                width: 200,
+                stack: [
+                  { text: "Hormat kami,", alignment: "center", color: textLight, fontSize: 10, margin: [0, 0, 0, 6] },
+                  ttdBase64
+                    ? {
+                        image: ttdBase64,
+                        width: 140,
+                        alignment: "center",
+                        margin: [0, 0, 0, 4],
+                      }
+                    : { text: "[TANDA TANGAN]", color: "#ccc", fontSize: 10, alignment: "center", margin: [0, 16, 0, 16] },
+                  {
+                    canvas: [
+                      {
+                        type: "line",
+                        x1: 0,
+                        y1: 0,
+                        x2: 200,
+                        y2: 0,
+                        lineWidth: 0.5,
+                        lineColor: "#999999",
+                      },
+                    ],
+                    margin: [0, 0, 0, 6],
+                  },
+                  {
+                    text: kosData.pemilik,
+                    alignment: "center",
+                    bold: true,
+                    fontSize: 11,
+                    color: navy,
+                    margin: [0, 0, 0, 2],
+                  },
+                  {
+                    text: "Pemilik Kost Babe Aji",
+                    alignment: "center",
+                    fontSize: 9,
+                    color: textLight,
+                  },
+                ],
+              },
+            ],
+            margin: [40, 0, 40, 0],
           },
         ],
+        margin: [0, 0, 0, 0],
       },
     ],
+
+    // ════════════════════════════════════════════
+    // 8. FOOTER
+    // ════════════════════════════════════════════
+    footer: () => ({
+      stack: [
+        {
+          canvas: [
+            { type: "line", x1: 40, y1: 0, x2: 555, y2: 0, lineWidth: 0.5, lineColor: "#d1d5db" },
+          ],
+          margin: [0, 0, 0, 4],
+        },
+        {
+          text: "Terima kasih telah mempercayai Kost Babe Aji.",
+          alignment: "center",
+          fontSize: 8,
+          color: textMuted,
+          italics: true,
+          margin: [40, 0, 40, 8],
+        },
+      ],
+    }),
   }
 }

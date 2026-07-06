@@ -6,3 +6,9 @@ export const kosData = {
   kontak: "0856-9919-957 / 0856-1283-563",
   bank: "BCA a.n. Murozih — 6815056900",
 }
+
+export const bankInfo = {
+  name: "BCA",
+  accountNumber: "6815056900",
+  accountName: "Murozih",
+}
